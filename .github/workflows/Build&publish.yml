@@ -3,6 +3,12 @@ name: Python application
 on:
   push:
    branches: [ sravan ]
+
+env: 
+  AWS_PROFILE_NAME: default
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+  KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
       
 jobs:
   build:
@@ -30,10 +36,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
           aws-region: us-east-1
 
+
       - name: Trigger deploy
-        uses: Consensys/kubernetes-action@master
+        #uses: Consensys/kubernetes-action@master
+        #env:
+        #  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        #with:
+        #  args: apply deployment.yml
+
+        uses: Pablommr/kubernetes-eks@v1.2.0
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: apply deployment.yml
+          KUBE_YAML: kubernetes/deployment.yml
+          ENVSUBST: true
+          KUBE_ROLLOUT: true
+          IMAGE_TAG: latest
 
