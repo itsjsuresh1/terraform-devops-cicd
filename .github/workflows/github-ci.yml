@@ -50,8 +50,8 @@ jobs:
 
     - name: Terraform plan
       run: |
-        terraform workspace select ${{ github.event.inputs.environment }}"
+        terraform validate
     - name: Terraform apply
       id: terraformOutputJson
       run: |
-        terraform workspace select ${{ github.event.inputs.environment }} -auto-approve
+        terraform apply -auto-approve
