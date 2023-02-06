@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-bytes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tech-bytes
+  template:
+    metadata:
+      labels:
+        app: tech-bytes
+        version: v1
+    spec:
+      containers:
+        - image: jboothapati/kpgaf:latest
+          imagePullPolicy: Always
+          name: tech-bytes
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            limits:
+              memory: 2000Mi
+            requests:
+              memory: 32Mi
+      imagePullSecrets:
+        - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tech-bytes
+  labels:
+    app: tech-bytes
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: 80
+  selector:
+    app: tech-bytes
