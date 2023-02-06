@@ -1,7 +1,8 @@
-name: Python application
+name: Sample CI/CD
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [sravan]
 
 env:  
   AWS_PROFILE_NAME: default
