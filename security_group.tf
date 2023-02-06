@@ -25,7 +25,7 @@
 resource "aws_security_group" "example" {
   name        = "example-security-group"
   description = "Allow all inbound traffic for demonstration purposes"
-  vpc_id = module.vpc.vpc_id
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
     from_port   = 0
