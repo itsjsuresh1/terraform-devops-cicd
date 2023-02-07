@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deploy to kubernetes'){
             steps {
-                sh kubectl run nginx --image=jboothapati/demo_app:${TAG} --replicas=5 --port=8090"
+                sh "kubectl run nginx --image=jboothapati/demo_app:${TAG} --replicas=5 --port=8090"
             }
         }
     }
