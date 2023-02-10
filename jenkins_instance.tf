@@ -47,7 +47,7 @@ module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
   name                        = "example-ec2-instance"
-  ami                         = "ami-025ff5abffdd579a0" # Personal jenkins image built
+  ami                         = "ami-019a4686fe114a7dc" # Personal jenkins image built
   instance_type               = "t2.medium" # Minuimum requirement
 
  ### We might require this later ############ to run scripts while lauching 
